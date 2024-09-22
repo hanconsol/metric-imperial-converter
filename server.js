@@ -14,6 +14,7 @@ let app = express();
 
 app.use('/public', express.static(process.cwd() + '/public'));
 
+
 app.use(cors({origin: '*'})); //For FCC testing purposes only
 
 app.use(bodyParser.json());
@@ -29,6 +30,8 @@ app.route('/')
 fccTestingRoutes(app);
 
 //Routing for API 
+
+
 apiRoutes(app);  
     
 //404 Not Found Middleware
