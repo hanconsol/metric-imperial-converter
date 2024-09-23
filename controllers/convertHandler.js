@@ -1,10 +1,42 @@
 function ConvertHandler() {
-
+  const countDivs = (inNum) => {
+    let count = 0;
+    for (let i = 0; i < inNum.length; i++) {
+      if (inNum[i] === "/") {
+        count++
+      }
+    }
+    return count;
+  }
   const numRegex = /^(\d*\.?\d*)(\/)?(\d*\.?\d*)?([a-zA-Z]*)$/g;
+  const twoDivRegx = /(\d*\.?\d*)?\/(\d*\.?\d*)?\/(\d*\.?\d*)?\w*/g;
+  const endLettersRegx = /[a-zA-Z]+$/;
+  const letStartRegx = /[a-zA-Z]/;
 
+  this.testSplit = function (input) {
+    // let index = input.indexOf(letStartRegx);
+    // console. log("index", index);
+    let splitVal = input.split(letStartRegx);
+    let numIn = splitVal.shift();
+
+  //  splitVal = splitVal.join("");
+    return  numIn; //, splitVal };
+  }
   this.getNum = function (input) {
     let result;
-
+    // if (!input) {
+    //     input = "1"
+    //     };
+    //  let divNum = input.match(/\//g);
+    //  console. log("divNum", divNum, "divNum.length ", divNum.length);
+    // // if (divNum.length >= 2 ) {
+    //   result = "invalid number";
+    //   return result;
+    // }
+    if (countDivs(input) >= 2) {
+      result = "invalid number";
+      return result;
+    }
     let firstNum = input.replace(numRegex, "$1");
     let div = input.replace(numRegex, "$2");
     let secondNum = input.replace(numRegex, "$3");
@@ -12,9 +44,9 @@ function ConvertHandler() {
     if (firstNum === "") {
       firstNum = "1";
     };
-    if (!div) {
-      div = "/";
-    };
+    // if (!div) {
+    //   div = "/";
+    // };
     if (secondNum === "") {
       secondNum = "1";
     };
@@ -29,7 +61,7 @@ function ConvertHandler() {
       console.log(result);
       return result;
     } else {
-      result = eval(`${parsedFirstNum} ${div} ${secondNum}`);
+      result = parsedFirstNum / parsedSecondNum;
       // console.log("result", result, typeof result);
       // if (isNaN(result)) {
       // result = "invalid number";
@@ -37,16 +69,21 @@ function ConvertHandler() {
       // return result
       // } else {
       console.log("eval result", result, typeof result);
-      return result;
+      return parseFloat(result);
       // }
-    }
+    
+  }
   };
 
   this.getUnit = function (input) {
     const validUnits = ["mi", "km", "l", "gal", "kg", "lbs"]
     let result;
 
-    let unit = input.replace(numRegex, "$4").toLowerCase();
+    let unit = input.match(endLettersRegx);
+    console.log("unit after end letter match", unit);
+    unit = unit.shift().toLowerCase();
+    console.log("unit after unshift ", unit);
+
     if (!validUnits.includes(unit)) {
       result = "invalid unit";
     } else if (unit === "l") {
@@ -131,20 +168,20 @@ function ConvertHandler() {
         result = `${galToL * initNum}`; //L
         break;
       case "L":
-        result = `${initNum / galToL  }`; //gal
+        result = `${initNum / galToL}`; //gal
         break;
       case "lbs":
         result = `${lbsToKg * initNum}`; //kg
         break;
       case "kg":
-        result = `${initNum / lbsToKg }`; //lbs
+        result = `${initNum / lbsToKg}`; //lbs
         break;
       default:
         result = "something went wrong";
         break;
     }
 
-    return parseFloat(result).toFixed(5);
+    return +parseFloat(result).toFixed(5);
   };
 
   this.getString = function (initNum, initUnit, returnNum, returnUnit) {
