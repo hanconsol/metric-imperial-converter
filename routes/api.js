@@ -12,12 +12,12 @@ module.exports = function (app) {
     console.log(req.query, input);
 
 
-      let numIn = convertHandler.testSplit(input);
-      console.log("numIn", numIn);
+      // let numIn = convertHandler.testSplit(input);
+      // console.log("numIn", numIn);
     //       console.log("remaining array after split", splitVal, typeof splitVal);
 
 
-    let initNum = convertHandler.getNum(numIn);
+    let initNum = convertHandler.getNum(input);
     console.log("initNum", initNum);
     let initUnit = convertHandler.getUnit(input);
     console.log("initUnit from handler", initUnit);
@@ -44,10 +44,10 @@ module.exports = function (app) {
       let returnUnitString = convertHandler.spellOutUnit(returnUnit);
       console.log("returnUnitString", returnUnitString);
 
-      let string = `${initNum} ${initUnitString} converts to ${returnNum} ${returnUnitString}`;
+      let string = convertHandler.getString(initNum, initUnitString, returnNum, returnUnitString);
 
       console.log(string);
-      res.json({ initNum: initNum, initUnit: initUnit, returnNum: returnNum, returnUnit: returnUnitString, string: string });
+      res.json({ initNum: initNum, initUnit: initUnit, returnNum: returnNum, returnUnit: returnUnit, string: string });
       // res.json({result: result});
     }
   })
