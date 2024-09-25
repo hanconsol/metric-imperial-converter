@@ -13,28 +13,12 @@ function ConvertHandler() {
   const endLettersRegx = /[a-zA-Z]+$/;
   const letStartRegx = /[a-zA-Z]/;
 
-  this.testSplit = function (input) {
-    // let index = input.indexOf(letStartRegx);
-    // console. log("index", index);
-    let splitVal = input.split(letStartRegx);
-    let numIn = splitVal.shift();
 
-  //  splitVal = splitVal.join("");
-    return  numIn; //, splitVal };
-  }
   this.getNum = function (input) {
     let result;
-    // if (!input) {
-    //     input = "1"
-    //     };
-    //  let divNum = input.match(/\//g);
-    //  console. log("divNum", divNum, "divNum.length ", divNum.length);
-    // // if (divNum.length >= 2 ) {
-    //   result = "invalid number";
-    //   return result;
-    // }
-      let splitVal = input.split(letStartRegx);
-        let numIn = splitVal.shift();
+
+    let splitVal = input.split(letStartRegx);
+    let numIn = splitVal.shift();
     if (countDivs(numIn) >= 2) {
       result = "invalid number";
       return result;
@@ -42,13 +26,10 @@ function ConvertHandler() {
     let firstNum = input.replace(numRegex, "$1");
     let div = input.replace(numRegex, "$2");
     let secondNum = input.replace(numRegex, "$3");
-    // console.log("firstNum", firstNum, "div", div, "secondNum", secondNum);
     if (firstNum === "") {
       firstNum = "1";
     };
-    // if (!div) {
-    //   div = "/";
-    // };
+
     if (secondNum === "") {
       secondNum = "1";
     };
@@ -64,17 +45,11 @@ function ConvertHandler() {
       return result;
     } else {
       result = parsedFirstNum / parsedSecondNum;
-      // console.log("result", result, typeof result);
-      // if (isNaN(result)) {
-      // result = "invalid number";
-      // console.log(result);
-      // return result
-      // } else {
       console.log("eval result", result, typeof result);
       return parseFloat(result);
       // }
-    
-  }
+
+    }
   };
 
   this.getUnit = function (input) {
@@ -103,7 +78,7 @@ function ConvertHandler() {
         result = "km";
         break;
       case "km":
-        console. log("did km to mi");
+        console.log("did km to mi");
         result = "mi";
         break;
       case "gal":
@@ -165,7 +140,7 @@ function ConvertHandler() {
         result = initNum * miToKm; //km
         break;
       case "km":
-        result = initNum /miToKm ; //mi
+        result = initNum / miToKm; //mi
         break;
       case "gal":
         result = galToL * initNum; //L

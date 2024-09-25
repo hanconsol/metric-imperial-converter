@@ -11,12 +11,6 @@ module.exports = function (app) {
     const { input } = req.query;
     console.log(req.query, input);
 
-
-      // let numIn = convertHandler.testSplit(input);
-      // console.log("numIn", numIn);
-    //       console.log("remaining array after split", splitVal, typeof splitVal);
-
-
     let initNum = convertHandler.getNum(input);
     console.log("initNum", initNum);
     let initUnit = convertHandler.getUnit(input);
@@ -30,7 +24,6 @@ module.exports = function (app) {
     } else if (initUnit === "invalid unit") {
       res.send("invalid unit")
     } else {
-
 
       let returnUnit = convertHandler.getReturnUnit(initUnit);
       console.log("returnUnit from handler", returnUnit)
@@ -48,7 +41,8 @@ module.exports = function (app) {
 
       console.log(string);
       res.json({ initNum: initNum, initUnit: initUnit, returnNum: returnNum, returnUnit: returnUnit, string: string });
-      // res.json({result: result});
+
+
     }
   })
 
