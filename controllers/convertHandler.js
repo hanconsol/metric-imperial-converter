@@ -9,7 +9,7 @@ function ConvertHandler() {
     return count;
   }
   const numRegex = /^(\d*\.?\d*)(\/)?(\d*\.?\d*)?([a-zA-Z]*)$/g;
-  const twoDivRegx = /(\d*\.?\d*)?\/(\d*\.?\d*)?\/(\d*\.?\d*)?\w*/g;
+  // const twoDivRegx = /(\d*\.?\d*)?\/(\d*\.?\d*)?\/(\d*\.?\d*)?\w*/g;
   const endLettersRegx = /[a-zA-Z]+$/;
   const letStartRegx = /[a-zA-Z]/;
 
@@ -24,7 +24,7 @@ function ConvertHandler() {
       return result;
     }
     let firstNum = input.replace(numRegex, "$1");
-    let div = input.replace(numRegex, "$2");
+    //  let div = input.replace(numRegex, "$2");
     let secondNum = input.replace(numRegex, "$3");
     if (firstNum === "") {
       firstNum = "1";
@@ -59,7 +59,7 @@ function ConvertHandler() {
     let unit = input.match(endLettersRegx);
     console.log("unit after end letter match", unit);
     unit = unit.shift().toLowerCase();
-    console.log("unit after unshift ", unit);
+    console.log("unit after shift ", unit);
 
     if (!validUnits.includes(unit)) {
       result = "invalid unit";
@@ -78,7 +78,6 @@ function ConvertHandler() {
         result = "km";
         break;
       case "km":
-        console.log("did km to mi");
         result = "mi";
         break;
       case "gal":
